@@ -1,7 +1,7 @@
 import pytest
-from models.user import User
-from models.project import Project
-from models.task import Task
+from jobnest_cli.models.user import User
+from jobnest_cli.models.project import Project
+from jobnest_cli.models.task import Task
 
 def test_user_creation():
     u = User("Alex", "alex@test.com", ["Python", "Django"])

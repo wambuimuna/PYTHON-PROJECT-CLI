@@ -1,9 +1,18 @@
-from models.user import User
+from jobnest_cli.models.user import User
+import json
+import os
 
+DATA_DIR = "data"
+USERS_FILE = os.path.join(DATA_DIR, "users.json")
 
-def test_user_to_from_dict():
-    u = User(user_id="u1", name="Alice", email="a@example.com")
-    d = u.to_dict()
-    u2 = User.from_dict(d)
-    assert u2.id == "u1"
-    assert u2.email == "a@example.com"
+def load_users() -> list:
+    try:
+        with open(USERS_FILE, "r") as f:
+            return [User.from_dict(u) for u in json.load(f)]
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_users(users: list):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(USERS_FILE, "w") as f:
+        json.dump([u.to_dict() for u in users], f, indent=2)

@@ -18,7 +18,7 @@ class Project:
 
     @classmethod
     def from_dict(cls, data):
-        from models.task import Task
+        from jobnest_cli.models.task import Task
         p = cls(data.get("title", "Untitled"), data.get("description", ""), data.get("due_date", ""))
         p.id = data.get("id", p.id)
         p.tasks = [Task.from_dict(t) for t in data.get("tasks", [])]

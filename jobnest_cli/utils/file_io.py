@@ -1,5 +1,5 @@
 import json, os
-from models.user import User
+from jobnest_cli.models.user import User
 
 DATA_DIR = "data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
